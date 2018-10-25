@@ -12,11 +12,11 @@ leaderRouter.use(bodyParser.json());
 leaderRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors, (req,res,next) => {
-    Leaders.find({})
-    .then((Leaders) => {
+    Leaders.find(req.query)
+    .then((leaders) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(Leaders);
+        res.json(leaders);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
